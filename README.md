@@ -14,9 +14,9 @@ Repository for Team-10 contact manager
       - iii. Checkmark all options for each box
       - iv. copy/paste and save token id
   
-2. Initialize git in the file location: 'git init'
+2. Initialize git in the file directory: 'git init'
 
-3. Clone repository in the desired file location: 
+3. Clone repository in the desired file directory: 
   - a. In an ubuntu/linux terminal 'cd' to the desired file location
   - b. then enter 'git clone https://github.com/ljdeme/Team-10_Contact_Manager.git' into the commandline 
   
@@ -29,11 +29,11 @@ Repository for Team-10 contact manager
   - b. Stage files before commiting:
     - i. To add files to stage: 'git add [filename]'
   - c. Commit Files:
-    - 'git commit -m [add a short message about what you changed/worked on]
+    - 'git commit -m '[add a short message about what you changed/worked on]'
   - d. Push file to repository: 'git push https://github.com/ljdeme/Team-10_Contact_Manager.git'
     - enter git username
     - enter the token you created for the password
 
 ## ! Important Notes !
-1. Always get most update version of the repository before making changes
+1. Always get the most updated version of the repository before pushing and/or making changes
 2. Keep your token somewhere you can easily access
