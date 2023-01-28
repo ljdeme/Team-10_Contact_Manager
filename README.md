@@ -14,11 +14,11 @@ Repository for Team-10 contact manager
       - iii. Checkmark all options for each box
       - iv. copy/paste and save token id
   
-2. Initialize git in the file directory: 'git init'
-
-3. Clone repository in the desired file directory: 
-  - a. In an ubuntu/linux terminal 'cd' to the desired file location
-  - b. then enter 'git clone https://github.com/ljdeme/Team-10_Contact_Manager.git' into the commandline 
+2. Clone repository in the desired file directory: 
+  - a. Create a folder that will hold the git repository
+  - b. In an ubuntu/linux terminal 'cd' to the desired file location
+  - c. Initialize git in the file directory: 'git init'
+  - d. Enter 'git clone https://github.com/ljdeme/Team-10_Contact_Manager.git' into the commandline 
   
 # Git Crash-Course
 1. To pull from repository
@@ -29,7 +29,7 @@ Repository for Team-10 contact manager
   - b. Stage files before commiting:
     - i. To add files to stage: 'git add [filename]'
   - c. Commit Files:
-    - 'git commit -m '[add a short message about what you changed/worked on]'
+    - 'git commit -m '[add a short message about what you changed/worked on]''
   - d. Push file to repository: 'git push https://github.com/ljdeme/Team-10_Contact_Manager.git'
     - enter git username
     - enter the token you created for the password
