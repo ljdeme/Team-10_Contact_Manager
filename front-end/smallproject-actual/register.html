@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Another Day in Paradise</title>
+    <link rel = "stylesheet" href = "/css/App.css">
+    <script src="https://kit.fontawesome.com/b37f716c7e.js" crossorigin="anonymous"></script>
+    <script type = "text/javascript" src = "js/code.js"></script>
+</head>
+<body>
+    <video autoplay muted loop id = "backgroundVid">
+		<source src = "images/Spongebob_Fire.mp4" type = "video/mp4">
+	</video>
+    <div id = "authFormContainer">
+        <h1>Register Page</h1>
+        <form id = registerPage><br />
+        <i class="fa-solid fa-person"></i>
+        <input type = "firstName" id = "firstName" placeholder = "First Name" /><br />
+        <i class="fa-solid fa-person"></i>
+        <input type = "lastName" id = "lastName" placeholder = "Last Name"/><br />
+        <i class="fa-solid fa-user"></i>
+        <input type = "text" id = "loginName" placeholder = "Username" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/><br />
+        <i class="fa-solid fa-lock"></i>
+        <input type = "password" id = "loginPassword" placeholder = "Password"/><br />
+        <i class="fa-solid fa-phone"></i>
+        <input type = "phone number" id = "phoneNumber" placeholder= "Phone Number"/><br />
+        <i class="fa-solid fa-at"></i>
+        <input type = "email address" id = "email" placeholder = "Email Address" /> <br />
+        <button type = "button" id = "registerButton" class = "submit-btn" onclick = "doRegister();"/>Register</button><br />
+        <span id= "login-form">Already have an account?&emsp;</span>
+        <a href = "index.html">Sign in</a><br/>
+        <span id = "registerResult"></span>
+        <div id ="userReq">
+            <h3>Username must contain the following</h3>
+            <p id = "userLen" class = "invalid">3 to 18 characters</p>
+            <p id = "userChar" class = "invalid">at least one letter</p>
+            <p id = "userFirst" class = "invalid">cannot start with a number<br/>or special character</p>
+        </div>
+        <div id = "passwordReq">
+            <h3>Password must contain the following</h3>
+            <p id = "passLen" class = "invalid">8 to 32 characters</p>
+            <p id = "passNum" class = "invalid">at least one number</p>
+            <p id = "passUpper" class = "invalid">at least one Uppercase character</p>
+        </div>
+        <div id = "emailReq">
+            <h3 id = "emailMsg" class = "invalid">Please enter a valid email address</h3>
+        </div>
+        <div id = "phoneNumberReq">
+            <h3 id = "phoneNumberMsg" class = "invalid">Please enter a valid phone number</h3>
+        </div>
+        </form>
+    </div>
+</body>
+
+<script>
+    let userReq = document.getElementById("loginName");
+    let userLen = document.getElementById("userLen");
+    let userChar = document.getElementById("userChar");
+    let userFirst = document.getElementById("userFirst");
+
+    let passwordReq = document.getElementById("loginPassword");
+    let passNum = document.getElementById("passNum");
+    let passLen = document.getElementById("passLen");
+    let passUpper = document.getElementById("passUpper");
+
+    let emailReq = document.getElementById("email");
+    let emailValid = document.getElementById("emailMsg");
+
+    let phoneNumberReq = document.getElementById("phoneNumber");
+    let phoneNumberValid = document.getElementById("phoneNumberMsg");
+
+    //displays error messages when the button is clicked on
+    userReq.onfocus = function(){
+        document.getElementById("userReq").style.display = "block";
+    }
+    userReq.onblur = function(){
+        document.getElementById("userReq").style.display = "none";
+    }
+    passwordReq.onfocus = function(){
+        document.getElementById("passwordReq").style.display = "block";
+    }
+    passwordReq.onblur = function(){
+        document.getElementById("passwordReq").style.display = "none";
+    }
+    emailReq.onfocus = function(){
+        document.getElementById("emailReq").style.display = "block";
+    }
+    emailReq.onblur = function(){
+        document.getElementById("emailReq").style.display = "none";
+    }
+    phoneNumberReq.onfocus = function(){
+        document.getElementById("phoneNumberReq").style.display = "block";
+    }
+    phoneNumberReq.onblur = function(){
+        document.getElementById("phoneNumberReq").style.display = "none";
+    }
+
+    //checks requirements for different fields
+    userReq.onkeyup = function(){
+        var char = /[a-z A-Z]/g;
+        if(userReq.value.match(char)){
+            userChar.classList.remove("invalid");
+            userChar.classList.add("valid");
+        }else{
+            userChar.classList.remove("valid");
+            userChar.classList.add("invalid");
+        }
+
+        if(userReq.value.charAt(0).match(char)){
+            userFirst.classList.remove("invalid");
+            userFirst.classList.add("valid");
+        }else{
+            userFirst.classList.remove("valid");
+            userFirst.classList.add("invalid");
+        }
+        
+        if(userReq.value.length >= 3 && userReq.value.length <= 18){
+            userLen.classList.remove("invalid");
+            userLen.classList.add("valid");
+        }else{
+            userLen.classList.remove("valid");
+            userLen.classList.add("invalid");
+        }
+    }
+
+    passwordReq.onkeyup = function(){
+        //checks for number
+        var nums = /[0-9]/g;
+        if(passwordReq.value.match(nums)){
+            passNum.classList.remove("invalid");
+            passNum.classList.add("valid");
+        }else{
+            passNum.classList.remove("valid");
+            passNum.classList.add("invalid");
+        }
+
+        //checks for uppercase character
+        var upperCase = /[A-Z]/g;
+        if(passwordReq.value.match(upperCase)){
+            passUpper.classList.remove("invalid");
+            passUpper.classList.add("valid");
+        }else{
+            passUpper.classList.remove("valid");
+            passUpper.classList.add("invalid");
+        }
+
+        //checks length of password 
+        if(passwordReq.value.length >= 8 && passwordReq.value.length <= 32){
+            passLen.classList.remove("invalid");
+            passLen.classList.add("valid");
+        }else{
+            passLen.classList.remove("valid");
+            passLen.classList.add("invalid");
+        }
+    }
+
+    emailReq.onkeyup = function(){
+        var emailCheck = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+\.[a-zA-z]+$/g;
+        if(emailReq.value.match(emailCheck)){
+            emailValid.classList.remove("invalid");
+            emailValid.classList.add("valid");
+        }else{
+            emailValid.classList.remove("valid");
+            emailValid.classList.add("invalid");
+        }
+    }
+
+    phoneNumberReq.onkeyup = function(){
+        var phoneCheck = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/g;
+        
+        if(phoneNumberReq.value.match(phoneCheck)){
+            phoneNumberValid.classList.remove("invalid");
+            phoneNumberValid.classList.add("valid");
+        }else{
+            phoneNumberValid.classList.remove("valid");
+            phoneNumberValid.classList.add("invalid");
+        }
+    }
+</script>
+</html>
