@@ -18,7 +18,7 @@ Repository for Team-10 contact manager
   - a. Create a folder that will hold the git repository
   - b. In an ubuntu/linux terminal 'cd' to the desired file location
   - c. Initialize git in the file directory: 'git init'
-  - d. Enter 'git clone https://github.com/ljdeme/Team-10_Contact_Manager.git' into the commandline 
+  - d. Enter 'git pull https://github.com/ljdeme/Team-10_Contact_Manager.git' into the commandline 
   
 # Git Crash-Course
 1. To pull from repository
