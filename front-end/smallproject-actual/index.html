@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Another Day in Paradise</title>
+	<link rel = "stylesheet" href = "/css/App.css">
+	<script src="https://kit.fontawesome.com/b37f716c7e.js" crossorigin="anonymous"></script>
+	<script type = "text/javascript" src = "js/code.js"></script>
+</head>
+<body>
+	<video autoplay muted loop id = "backgroundVid">
+		<source src = "images/Spongebob_Fire.mp4" type = "video/mp4">
+	</video>
+<div id="authFormContainer">
+	<div id = "loginForm">
+		<h1 style = "font-size: 35px";">TEAM 10</h1>
+		<span id="login-form">PLEASE LOG IN</span><br />
+		<span id="loginResult"></span><br/>
+		<i class="fa-solid fa-user"></i>
+		<input type="text" id="loginName" placeholder="Username" required pattern = "^[A-Za-z][A-Za-z0-9_]{3,18}$"/><br />
+		<i class="fa-solid fa-lock"></i>
+		<input type="password" id="loginPassword" placeholder="Password" required pattern = "(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*]).{8,32}"/><br />
+		<button type="button" id="loginButton" class="submit-btn" onclick="doLogin();"> Sign In </button><br />
+		<span id="register-form">Don't have an account?&emsp;</span>
+		<a href ="register.html">Sign up</a><br/>
+	</div>
+</div>
+
+</body>
+</html>
