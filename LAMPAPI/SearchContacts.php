@@ -13,12 +13,11 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("SELECT FirstName, LastName, Phone, Email, ContactID FROM Contacts WHERE FirstName LIKE ? AND LastName LIKE ? AND Phone LIKE ? AND Email LIKE ? AND UserID = ?");
-		$FirstName = "%" . $inData["FirstName"] . "%";
-       	$LastName = "%" . $inData["LastName"] . "%";
+		$stmt = $conn->prepare("SELECT Name, Phone, Email, ContactID FROM Contacts WHERE Name LIKE ? AND Phone LIKE ? AND Email LIKE ? AND UserID = ?");
+		$Name = "%" . $inData["Name"] . "%";
 		$Phone = "%" . $inData["Phone"] . "%";
 		$Email = "%" . $inData["Email"] . "%";
-		$stmt->bind_param("sssss", $FirstName, $LastName, $Phone, $Email , $inData["UserID"]);
+		$stmt->bind_param("sssss", $Name, $Phone, $Email , $inData["UserID"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
@@ -30,7 +29,7 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-			$searchResults .= '"'. $row["FirstName"] ." ". $row["LastName"] ." ". $row["Phone"] ." ". $row["Email"] .'"';
+			$searchResults .= '"'. $row["Name"] ." ". $row["Phone"] ." ". $row["Email"] .'"';
 		}
 		
 		if( $searchCount == 0 )
