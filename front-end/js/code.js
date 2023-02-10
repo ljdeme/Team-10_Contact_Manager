@@ -283,7 +283,7 @@ function showContacts(){
                 let text = "<table border='1'>";
                 for(let i = 0; i <jsonObject.results.length; i++){
                     text = text + "<tr id='row" + i + "'>";
-                    text = text + "<td id= 'contents" + i + "'><span>" + jsonObject.results[i] + "</span></td>";
+                    text = text + "<td id= 'contents" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
                     text = text + "</tr>";
                 }
                 text = text + "</table>"
