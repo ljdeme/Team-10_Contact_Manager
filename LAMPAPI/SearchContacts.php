@@ -14,10 +14,7 @@
 	else
 	{
 		$stmt = $conn->prepare("SELECT Name, Phone, Email, ContactID FROM Contacts WHERE Name LIKE ? AND Phone LIKE ? AND Email LIKE ? AND UserID = ?");
-		$Name = "%" . $inData["Name"] . "%";
-		$Phone = "%" . $inData["Phone"] . "%";
-		$Email = "%" . $inData["Email"] . "%";
-		$stmt->bind_param("sssss", $Name, $Phone, $Email , $inData["UserID"]);
+		$stmt->bind_param("ssss", $inData["Search"], $inData["Search"], $inData["Search"], $inData["UserID"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
