@@ -1,116 +1,202 @@
 
-body{
-  
-}
 #authFormContainer{  
-  /*align-items: center;
-  box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.3) ;
-  max-width: 500px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 50px 70px 70px;
-  text-align: center;
-  border-radius: 20px;*/
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 50px 70px 70px;
-  box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, .3);
+  padding: 20px 50px 50px;
+  box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.801);
   border-radius: 20px;
   text-align: center;
+  align-items: center;
+  vertical-align: middle;
+  font-family: 'Century Gothic';
 }
 
-#backgroundVid{
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  position:fixed;
-  left: 0;
-  right: 0;
+#backgroundVid
+{
+  position: absolute;
+  z-index: -1;
   top: 0;
-  bottom: 0;
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  object-fit: cover;
+}
+
+.team10Icon
+{
+  text-align: center;
+  align-items: center;
+  font-family: 'Century Gothic';
+  font-size: 34px;
+  height: auto;
+  width: auto;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+}
+
+.logo
+{
+  margin: 1rem;
+}
+
+.background-overlay
+{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: white;
+  opacity: .85;
   z-index: -1;
 }
 
-a:link{
+a:link
+{
   color: red;
   background-color: transparent;
   text-decoration: none;
 }
-a:visited{
+
+a:visited
+{
   color: red;
   background-color: transparent;
   text-decoration: none;
 }
-a:hover{
-  color: blue;
+
+a:hover
+{
+  color: #FFAE73;
   background-color: transparent;
   text-decoration: none;
 }
-a:active{
+a:active
+{
   color: yellow;
   background-color: transparent;
   text-decoration: none;
 }
 
-label {
+label
+{
   text-align: left;
   padding: 0.25rem 0;
 }
 
-input{
-  margin: 0.5rem 0;
-  padding: 1rem;
+input
+{
+  font-family: 'Century Gothic';
+  margin: .60rem 0;
+  border-radius: 10px;
+  height: 30px;
+  width: 200px;
+  padding: 5px 10px;
   border: none;
-  border-radius: 10px;
 }
 
-button{
-  /*border: none;*/
-  background-color: black;
-  color: #EEEEEE;
-  padding: 18px;
-  border-radius: 10px;
-  cursor: pointer
+button
+{
   
+  font-family: 'Century Gothic';
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: black;
+  border: none;
+  color: White;
+  padding: 10px 70px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 1rem;
 }
 
-.link-btn{
-  background: none;
-  color: black;
-  text-decoration: underline;
-
-}
-.submit-btn:hover{
+.submit-btn:hover
+{
   background-color: red;
 }
 
-#userReq{
+#userReq
+{
   display: none;
 }
-#passwordReq{
+#passwordReq
+{
   display: none;
 }
-#emailReq{
+
+#emailReq
+{
   display: none;
 }
-#phoneNumberReq{
+#phoneNumberReq
+{
   display:none;
 }
-.valid{
+
+.valid
+{
   color: lightgreen;
 }
 .valid:before{
   left: -35px;
   content: "\2713"
 }
-.invalid{
+.invalid
+{
   color: crimson;
 }
-.invalid::before{
+.invalid::before
+{
   left: -35px;
   content: "\2716";
+}
+
+#capsMsg
+{
+  display: none;
+}
+
+#anotherTop
+{
+  margin-top:100px;
+  margin-left: 525px;
+  text-align:center;
+  position: absolute;
+  font-family: 'Engravers MT';
+  font-size: 125px;
+  color: rgb(0, 0, 0);
+}
+
+#dayCenter
+{
+  margin-top:400px;
+  margin-left: 150px;
+  position:absolute;
+  font-family: 'Engravers MT';
+  font-size: 125px;
+
+  color: rgb(0, 0, 0);
+}
+
+#inRight
+{
+  margin-top: 400px;
+  margin-left:1390px;
+  position:absolute;
+  text-align:right;
+  font-family: 'Engravers MT';
+  font-size: 125px;
+  color: rgb(0, 0, 0);
+}
+
+#paradiseBottom
+{
+  margin-top:700px;
+  margin-left: 500px;
+  position:absolute;
+  text-align: center;
+  font-family: 'Engravers MT';
+  font-size: 125px;
+  color: rgb(0, 0, 0);
 }

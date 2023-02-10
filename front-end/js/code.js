@@ -118,6 +118,41 @@ function saveCookie(){
     document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
 }
 
+function readCookie()
+{
+	userId = -1;
+	let data = document.cookie;
+	let splits = data.split(",");
+	for(var i = 0; i < splits.length; i++) 
+	{
+		let thisOne = splits[i].trim();
+		let tokens = thisOne.split("=");
+		if( tokens[0] == "firstName" )
+		{
+			firstName = tokens[1];
+		}
+		else if( tokens[0] == "lastName" )
+		{
+			lastName = tokens[1];
+		}
+		else if( tokens[0] == "userId" )
+		{
+			userId = parseInt( tokens[1].trim() );
+		}
+	}
+	
+	if( userId < 0 )
+	{
+		window.location.href = "index.html";
+	}
+    else
+	{
+        firstName = firstName[0].toUpperCase() + firstName.substring(1);
+        lastName = lastName[0].toUpperCase() + lastName.substring(1);
+		document.getElementById("welcomeName").innerHTML = "Welcome to Paradise " + firstName + " " + lastName;
+	}
+}
+
 function validRegister(firstName, lastName, username, password, email){
     var fNameFlag, lastNameFlag, userFlag, passFlag, emailFlag;
     fNameFlag = lastNameFlag = userFlag = passFlag = emailFlag = true;
@@ -216,4 +251,48 @@ function validLogin(username, password){
         return false;
     }
     return true;
+}
+
+function sayName(){
+    document.getElementById("welcomeName").innerHTML = firstName + " in sayName" + lastName;
+}
+
+function showContacts(){
+    let tmp ={
+        FirstName: "",
+        LastName:"",
+        Phone:"",
+        Email:"",
+        UserID: userId
+    };
+
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = urlBase + "/SearchContacts." + extension;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try{
+        xhr.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                let jsonObject = JSON.parse(xhr.responseText);
+                if(jsonObject.error){
+                    console.log(jsonObject.error);
+                    return;
+                }
+                let text = "<table border='1'>";
+                for(let i = 0; i <jsonObject.results.length; i++){
+                    text = text + "<tr id='row" + i + "'>";
+                    text = text + "<td id= 'contents" + i + "'><span>" + jsonObject.results[i] + "</span></td>";
+                    text = text + "</tr>";
+                }
+                text = text + "</table>"
+                document.getElementById("tBody").innerHTML = text;
+            }
+        }
+        xhr.send(jsonPayload);
+    }
+    catch(error){
+        console.log(error.message);
+    }
 }

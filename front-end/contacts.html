@@ -2,10 +2,29 @@
 <html>
     <head>
         <title>Another Day in Paradise</title>
-
+        <script type = "text/javascript" src = "js/code.js"></script>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() 
+            {
+                readCookie();
+                showContacts();
+            }, false);
+	    </script>
     </head>
 
     <body>
-        <h1>Team 10 in contacts manager</h1>
+        <div id = "welcomeMsg">
+            <h1 id= "welcomeName"></h1>
+        </div>
+        <table bgcolor="white">
+            <tr align="center">
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+            <tbody id="tBody"></tbody>
+        </table>
     </body>
 </html>
