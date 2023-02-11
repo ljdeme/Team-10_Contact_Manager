@@ -36,7 +36,7 @@ function doLogin(){
                 userId = jsonObject.id;
 
                 if(userId < 1){
-                    document.getElementById("loginResult").innerHTML = "Either Username or Password is incorrect";
+                    document.getElementById("loginResult").innerHTML = "* Either Username or Password is incorrect";
                     return;
                 }
 
@@ -101,7 +101,7 @@ function doRegister(){
                 firstName = jsonObject.firstName;
                 lastName = jsonObject.lastName;
                 saveCookie();
-                window.location.href = "contacts.html";
+                window.location.href = "login.html";
             }
         };
         xhr.send(jsonPayload);
@@ -259,10 +259,7 @@ function sayName(){
 
 function showContacts(){
     let tmp ={
-        FirstName: "",
-        LastName:"",
-        Phone:"",
-        Email:"",
+        Search: "",
         UserID: userId
     };
 
@@ -282,8 +279,17 @@ function showContacts(){
                 }
                 let text = "<table border='1'>";
                 for(let i = 0; i <jsonObject.results.length; i++){
-                    text = text + "<tr id='row" + i + "'>";
-                    text = text + "<td id= 'contents" + i + "'><span>" + jsonObject.results[i] + "</span></td>";
+                    text = text + "<tr id = 'tableRow'>";
+                    text = text + "<td contenteditable='false'><span>" + jsonObject.results[i].FirstName + "</span></td>";
+                    text = text + "<td contenteditable='false'><span>" + jsonObject.results[i].LastName + "</span></td>";
+                    text = text + "<td contenteditable='false'><span>" + jsonObject.results[i].Email + "</span></td>";
+                    text = text + "<td contenteditable='false'><span>" + jsonObject.results[i].Phone + "</span></td>";
+                    text = text + '<td><button type ="button" id ="editBtn" class ="submit-btn" onclick ="editRow();editContact();"'
+                                + 'title="Edit" date-toggle="tooltip"/><i class ="material-icons">&#xE254;</i></button>';
+                    text = text + '<td><button type ="button" id ="deleteBtn" class ="submit-btn" onclick ="deleteContact();"'
+                                + 'title="Delete" date-toggle="tooltip"/><i class ="material-icons">&#xE872;</i></button>';
+                    text = text + '<td><button type ="button" id ="confirmBtn" class ="submit-btn" onclick ="editContact();"'
+                                + 'title="Confirm" date-toggle="tooltip"/><i class ="material-icons">&#xE03B;</i></button></td>';
                     text = text + "</tr>";
                 }
                 text = text + "</table>"
@@ -295,4 +301,67 @@ function showContacts(){
     catch(error){
         console.log(error.message);
     }
+}
+
+function doLogout(){
+	userId = 0;
+	firstName = "";
+	lastName = "";
+	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+	window.location.href = "index.html";
+}
+
+function addContact(){
+    let firstNameAdd = document.getElementById("firstNameAdd").value;
+    let lastNameAdd = document.getElementById("lastNameAdd").value;
+    let emailAdd = document.getElementById("emailAdd").value;
+    let phoneAdd = document.getElementById("phoneNumberAdd").value;
+
+	let tmp = {FirstName: firstNameAdd,
+                LastName: lastNameAdd,
+                Phone: phoneAdd,
+                Email: emailAdd,
+                UserID: userId};
+
+	let jsonPayload = JSON.stringify( tmp );
+
+	let url = urlBase + '/AddContact.' + extension;
+	
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type" , "application/json; charset=UTF-8");
+    try{
+        xhr.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                console.log("contact added");
+                document.getElementById("addContactForm").reset();
+                showContacts();
+            }
+        };
+        xhr.send(jsonPayload);
+    }
+    catch(err){
+        document.getElementById("contactAddResult").innerHTML = err.message;
+        console.log(err.message);
+    }
+}
+
+function openAdd(){
+    document.getElementById("addContactPopup").style.display = "block";
+}
+
+function closeAdd(){
+    document.getElementById("addContactPopup").style.display = "none";
+}
+
+function editContact(){
+    let
+}
+
+function editRow()
+{
+    
+}
+function deleteContact(){
+
 }
