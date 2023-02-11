@@ -7,56 +7,58 @@
     <script type = "text/javascript" src = "js/code.js"></script>
 </head>
 <body>
-    <div><p id="anotherTopReg" class="center">Another</p></div>
+    <div class="bg">
+        <div><p id="anotherTopReg" class="center">Another</p></div>
         <div><p id="dayCenter" class="center">Day</p></div>
         <div><p id="inRight">In</p></div>
         <div><p id="paradiseBottomReg">Paradise</p></div>
-    <video autoplay muted loop id = "backgroundVid">
-        <source src = "images/Spongebob_Fire.mp4" type = "video/mp4">
-    </video>
-    <div id = "authFormContainer">
-        <div id = "loginForm">
-            <form id = registerPage><br />
-                <h1>Register Page</h1>
-                <i class="fa-solid fa-person"></i>
-                <input type = "firstName" id = "firstName" placeholder = "First Name" /><br />
-                <i class="fa-solid fa-person"></i>
-                <input type = "lastName" id = "lastName" placeholder = "Last Name"/><br />
-                <i class="fa-solid fa-user"></i>
-                <input type = "text" id = "loginName" placeholder = "Username" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/><br />
-                <i class="fa-solid fa-lock"></i>
-                <input type = "password" id = "loginPassword" placeholder = "Password"/><br />
-                <i class="fa-solid fa-phone"></i>
-                <input type = "phone number" id = "phoneNumber" placeholder= "Phone Number"/><br />
-                <i class="fa-solid fa-at"></i>
-                <input type = "email address" id = "email" placeholder = "Email Address" /> <br />
-                <button type = "button" id = "registerButton" class = "submit-btn" onclick = "doRegister();"/>Register</button><br />
-                <span id= "login-form">Already have an account?&emsp;</span>
-                <a href = "index.html">Sign in</a><br/>
-                <span id = "registerResult"></span>
+        <video autoplay muted loop id = "backgroundVid">
+            <source src = "images/Spongebob_Fire.mp4" type = "video/mp4">
+        </video>
+        <div id = "authFormContainer">
+            <div id = "loginForm">
+                <form id = registerPage><br />
+                    <h1>Register Page</h1>
+                    <i class="fa-solid fa-person"></i>
+                    <input type = "firstName" id = "firstName" placeholder = "First Name" /><br />
+                    <i class="fa-solid fa-person"></i>
+                    <input type = "lastName" id = "lastName" placeholder = "Last Name"/><br />
+                    <i class="fa-solid fa-user"></i>
+                    <input type = "text" id = "loginName" placeholder = "Username" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/><br />
+                    <i class="fa-solid fa-lock"></i>
+                    <input type = "password" id = "loginPassword" placeholder = "Password"/><br />
+                    <i class="fa-solid fa-phone"></i>
+                    <input type = "phone number" id = "phoneNumber" placeholder= "Phone Number"/><br />
+                    <i class="fa-solid fa-at"></i>
+                    <input type = "email address" id = "email" placeholder = "Email Address" /> <br />
+                    <button type = "button" id = "registerButton" class = "submit-btn" onclick = "doRegister();"/>Register</button><br />
+                    <span id= "login-form">Already have an account?&emsp;</span>
+                    <a href = "index.html">Sign in</a><br/>
+                    <span id = "registerResult"></span>
 
-                <div id ="userReq">
-                    <h3>Username must contain the following</h3>
-                    <p id = "userLen" class = "invalid">3 to 18 characters</p>
-                    <p id = "userChar" class = "invalid">at least one letter</p>
-                    <p id = "userFirst" class = "invalid">cannot start with a number<br/>or special character</p>
-                </div>
+                    <div id ="userReq">
+                        <h3>Username must contain the following</h3>
+                        <p id = "userLen" class = "invalid">3 to 18 characters</p>
+                        <p id = "userChar" class = "invalid">at least one letter</p>
+                        <p id = "userFirst" class = "invalid">cannot start with a number<br/>or special character</p>
+                    </div>
 
-                <div id = "passwordReq">
-                    <h3>Password must contain the following</h3>
-                    <p id = "passLen" class = "invalid">8 to 32 characters</p>
-                    <p id = "passNum" class = "invalid">at least one number</p>
-                    <p id = "passUpper" class = "invalid">at least one Uppercase character</p>
-                </div>
+                    <div id = "passwordReq">
+                        <h3>Password must contain the following</h3>
+                        <p id = "passLen" class = "invalid">8 to 32 characters</p>
+                        <p id = "passNum" class = "invalid">at least one number</p>
+                        <p id = "passUpper" class = "invalid">at least one Uppercase character</p>
+                    </div>
 
-                <div id = "emailReq">
-                    <h3 id = "emailMsg" class = "invalid">Please enter a valid email address</h3>
-                </div>
+                    <div id = "emailReq">
+                        <h3 id = "emailMsg" class = "invalid">Please enter a valid email address</h3>
+                    </div>
 
-                <div id = "phoneNumberReq">
-                    <h3 id = "phoneNumberMsg" class = "invalid">Please enter a valid phone number</h3>
-                </div>
-            </form>
+                    <div id = "phoneNumberReq">
+                        <h3 id = "phoneNumberMsg" class = "invalid">Please enter a valid phone number</h3>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </body>

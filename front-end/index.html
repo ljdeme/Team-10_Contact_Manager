@@ -7,6 +7,7 @@
 	<script type = "text/javascript" src = "js/code.js"></script>
 </head>
 	<body>
+		<div class="bg">
 			<div><p id="anotherTop" class="center">Another</p></div>
 			<div><p id="dayCenter" class="center">Day</p></div>
 			<div><p id="inRight">In</p></div>
@@ -15,22 +16,22 @@
 			<video autoplay muted loop id = "backgroundVid">
 				<source src = "images/Spongebob_Fire.mp4" type = "video/mp4">
 			</video>;
-		</div>
-		<div id="authFormContainer">
-			<div id = "loginForm">
-				<img id="logo" src= "/images/team10Logo.png" width = "100" height = "90"><br/>
-				<span id="loginResult"></span><br/>
-				<i class="fa-solid fa-user"></i>
-				<input type="text" id="loginName" placeholder="Username" required pattern = "^[A-Za-z][A-Za-z0-9_]{3,18}$"/><br />
-				<i class="fa-solid fa-lock"></i>
-				<input type="password" id="loginPassword" placeholder="Password" required pattern = "(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*]).{8,32}"/><br />
-					<div class="sign_in"> 
-						<button type="button" id="loginButton" class="submit-btn" onclick="doLogin();"> Sign In </button><br />
-					</div>
-				<span id="register-form">Don't have an account?</span>
-				<a href ="register.html">Sign up</a><br/>
+		
+			<div id="authFormContainer">
+				<div id = "loginForm">
+					<img id="logo" src= "/images/team10Logo.png" width = "100" height = "90"><br/>
+					<span id="loginResult"></span><br/>
+					<i class="fa-solid fa-user"></i>
+					<input type="text" id="loginName" placeholder="Username" required pattern = "^[A-Za-z][A-Za-z0-9_]{3,18}$"/><br />
+					<i class="fa-solid fa-lock"></i>
+					<input type="password" id="loginPassword" placeholder="Password" required pattern = "(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*]).{8,32}"/><br />
+						<div class="sign_in"> 
+							<button type="button" id="loginButton" class="submit-btn" onclick="doLogin();"> Sign In </button><br />
+						</div>
+					<span id="register-form">Don't have an account?</span>
+					<a href ="register.html">Sign up</a><br/>
+				</div>
 			</div>
 		</div>
-		
 	</body>
 </html>
