@@ -48,9 +48,10 @@
   margin-bottom: 1rem;
 }
 
-.logo
+#logo
 {
   margin: 1rem;
+  width: 20px;
 }
 
 a:link
@@ -187,9 +188,9 @@ button
 
 #dayCenter
 {
-  margin-top:400px;
-  margin-left: 150px;
-  position:absolute;
+  margin-top: 400px;
+  margin-left: 197px;
+  position: absolute;
   font-family: 'Engravers MT';
   font-size: 125px;
   color: #1D1D1D;
@@ -198,9 +199,9 @@ button
 #inRight
 {
   margin-top: 400px;
-  margin-left:1390px;
-  position:absolute;
-  text-align:right;
+  margin-left: 1363px;
+  position: absolute;
+  text-align: right;
   font-family: 'Engravers MT';
   font-size: 125px;
   color: #1D1D1D;
