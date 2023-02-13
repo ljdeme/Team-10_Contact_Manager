@@ -101,7 +101,7 @@ function doRegister(){
                 firstName = jsonObject.firstName;
                 lastName = jsonObject.lastName;
                 saveCookie();
-                window.location.href = "login.html";
+                window.location.href = "index.html";
             }
         };
         xhr.send(jsonPayload);
@@ -253,13 +253,9 @@ function validLogin(username, password){
     return true;
 }
 
-function sayName(){
-    document.getElementById("welcomeName").innerHTML = firstName + " in sayName" + lastName;
-}
-
-function showContacts(){
+function showContacts(search){
     let tmp ={
-        Search: "",
+        Search: search,
         UserID: userId
     };
 
@@ -274,22 +270,25 @@ function showContacts(){
             if(this.readyState == 4 && this.status == 200){
                 let jsonObject = JSON.parse(xhr.responseText);
                 if(jsonObject.error){
+                    document.getElementById("tBody").innerHTML = "<tBody style='display:none;'></tbody>"
                     console.log(jsonObject.error);
                     return;
                 }
+                console.log("in show: " + jsonObject.results[0].FirstName);
                 let text = "<table border='1'>";
                 for(let i = 0; i <jsonObject.results.length; i++){
                     text = text + "<tr id = 'tableRow'>";
-                    text = text + "<td contenteditable='false'><span>" + jsonObject.results[i].FirstName + "</span></td>";
-                    text = text + "<td contenteditable='false'><span>" + jsonObject.results[i].LastName + "</span></td>";
-                    text = text + "<td contenteditable='false'><span>" + jsonObject.results[i].Email + "</span></td>";
-                    text = text + "<td contenteditable='false'><span>" + jsonObject.results[i].Phone + "</span></td>";
-                    text = text + '<td><button type ="button" id ="editBtn" class ="submit-btn" onclick ="editRow();editContact();"'
+                    text = text + "<td style='display:none;' id = 'contactID" + i + "'>" + jsonObject.results[i].ContactID + "</td>"
+                    text = text + "<td id='firstName" + i + "'>" + jsonObject.results[i].FirstName + "</td>";
+                    text = text + "<td id='lastName" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
+                    text = text + "<td id='email" + i + "'><span>" + jsonObject.results[i].Email + "</span></td>";
+                    text = text + "<td id='phone" + i + "'><span>" + jsonObject.results[i].Phone + "</span></td>";
+                    text = text + '<td><button type ="button" id ="editBtn' + i + '" class ="submit-btn" onclick ="editContact(' + i+ ');"'
                                 + 'title="Edit" date-toggle="tooltip"/><i class ="material-icons">&#xE254;</i></button>';
-                    text = text + '<td><button type ="button" id ="deleteBtn" class ="submit-btn" onclick ="deleteContact();"'
-                                + 'title="Delete" date-toggle="tooltip"/><i class ="material-icons">&#xE872;</i></button>';
-                    text = text + '<td><button type ="button" id ="confirmBtn" class ="submit-btn" onclick ="editContact();"'
-                                + 'title="Confirm" date-toggle="tooltip"/><i class ="material-icons">&#xE03B;</i></button></td>';
+                    text = text + '<button type ="button" id ="confirmBtn' + i + '" class ="submit-btn" onclick ="saveContact(' + i + ');"'
+                                + 'title="Confirm" date-toggle="tooltip" style="display:none;"/><i class ="material-icons">&#xE03B;</i></button>';
+                    text = text + '<button type ="button" id ="deleteBtn' + i + '" class ="submit-btn" onclick ="deleteContact(' + i + ');"'
+                                + 'title="Delete" date-toggle="tooltip"/><i class ="material-icons">&#xE872;</i></button></td>';
                     text = text + "</tr>";
                 }
                 text = text + "</table>"
@@ -335,7 +334,7 @@ function addContact(){
             if(this.readyState == 4 && this.status == 200){
                 console.log("contact added");
                 document.getElementById("addContactForm").reset();
-                showContacts();
+                showContacts("");
             }
         };
         xhr.send(jsonPayload);
@@ -354,14 +353,104 @@ function closeAdd(){
     document.getElementById("addContactPopup").style.display = "none";
 }
 
-function editContact(){
-    let
+function editContact(id){
+    document.getElementById("confirmBtn" + id).style.display = "inline-block";
+    document.getElementById("editBtn" + id).style.display = "none";
+
+    let firstNameEdit = document.getElementById("firstName" + id).innerText;
+    let lastNameEdit = document.getElementById("lastName" + id).innerText;
+    let emailEdit = document.getElementById("email" + id).innerText;
+    let phoneEdit = document.getElementById("phone" + id).innerText;
+
+    document.getElementById("firstName" + id).innerHTML = "<input type ='text' id='firstNameEdit" + id + "' value='" + firstNameEdit + "'>";
+    document.getElementById("lastName" + id).innerHTML = "<input type ='text' id='lastNameEdit" + id + "' value='" + lastNameEdit + "'>";
+    document.getElementById("email" + id).innerHTML = "<input type ='text' id='emailEdit" + id + "' value='" + emailEdit + "'>";
+    document.getElementById("phone" + id).innerHTML = "<input type ='text' id='phoneEdit" + id + "' value='" + phoneEdit + "'>";
 }
 
-function editRow()
-{
+function saveContact(id){
+    var firstNameSave = document.getElementById("firstNameEdit" + id).value;
+    var lastNameSave = document.getElementById("lastNameEdit" + id).value;
+    var emailSave = document.getElementById("emailEdit" + id).value;
+    var phoneSave = document.getElementById("phoneEdit" + id).value;
+    var contactIDSave = document.getElementById("contactID" + id).innerText;
     
-}
-function deleteContact(){
+    document.getElementById("firstName" + id).innerHTML = firstNameSave;
+    document.getElementById("lastName" + id).innerHTML = lastNameSave;
+    document.getElementById("email" + id).innerHTML = emailSave;
+    document.getElementById("phone" + id).innerHTML = phoneSave;
 
+    document.getElementById("confirmBtn" + id).style.display = "none";
+    document.getElementById("editBtn" + id).style.display = "inline-block";
+
+    let tmp = { FirstName: firstNameSave,
+                LastName: lastNameSave,
+                Phone: phoneSave,
+                Email: emailSave,
+                UserID: userId,
+                ContactID: contactIDSave
+    };
+
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = urlBase + "/UpdateContact." + extension;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try{
+        xhr.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                console.log("contact updated");
+                showContacts("");
+            }
+        };
+        xhr.send(jsonPayload);
+    }
+    catch(err){
+        console.log(err.message);
+    }
 }
+
+
+function deleteContact(i){
+    console.log("i = " + i);
+    let firstNameDlt = document.getElementById("firstName" + i).innerText;
+    let lastNameDlt = document.getElementById("lastName" + i).innerText;
+    let contactId = document.getElementById("contactID" + i).innerText;
+    console.log("firstName" + i + " = " + firstNameDlt);
+    let alert = confirm("Are you sure you want to delete " + firstNameDlt + " " + lastNameDlt);
+    if(alert == true){
+            let tmp = { ContactID: contactId,
+                        FirstName: firstNameDlt,
+                        LastName: lastNameDlt,};
+
+        let jsonPayload = JSON.stringify(tmp);
+
+        let url = urlBase + "/DeleteContact." + extension;
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        try{
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    console.log("contact deleted");
+                    showContacts("");
+                }
+            };
+            xhr.send(jsonPayload);
+        }
+        catch(err){
+            console.log(err.message);
+        }
+    }
+    else{
+        console.log("Contact deletion canceled");
+    }
+}
+
+function searchContact(){
+    let search = document.getElementById("search_input").value;
+    console.log("in search: " + search);
+    showContacts(search);
+}
+
