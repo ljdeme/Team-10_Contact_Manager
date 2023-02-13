@@ -15,14 +15,14 @@
             document.addEventListener('DOMContentLoaded', function() 
             {
                 readCookie();
-                showContacts();
+                showContacts("");
             }, false);
 	    </script>
+        <script src="https://kit.fontawesome.com/b37f716c7e.js" crossorigin="anonymous"></script>
     </head>
 
     <body>
         <div class="bg-img">
-            <div class="jumbotron jumbotron-fluid">
                 <div class="container">
                     <img class= "logo" src="../images/team10Logo.png" alt="team10 logo">
                     <div id = "welcomeMsg">
@@ -32,16 +32,18 @@
                         <button type = "button" id = "logoutButton" class = "submit-btn" onclick = "doLogout();"/>Sign Out</button>
                     </div>
                 </div>
-            </div>
-
-            <form action="">
-                <input type="text" placeholder="Search Contacts" name="search">
-                <button type="submit"><img src= "images/search.png"></button>
+                
+            <div id="search_bar">
+            <form>
+                <input type="text" onkeyup="searchContact();" placeholder="Search Contacts" name="search" id = "search_input">
+                <button id="search_button" type="button" onclick="searchContact();"><img id= "search_img"src= "images/search.png"></button>
             </form>
+            </div> 
 
             <div class="table-border" >
-                <table class = 'table table-hover'>
+                <table class = 'table table-hover' id="contactsTable">
                     <tr align="center">
+                        <th style="display:none;">ContactID</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Email</th>
@@ -52,27 +54,31 @@
                 </table>
             </div>
             
-            <div id = "addOpenBtn">
-                <button class = "addPopupBtn" onclick="openAdd();">Add Contact</button>
-            </div>
+            <div class="add_button">
+                <div id = "addOpenBtn">
+                    <button class = "addPopupBtn" onclick="openAdd();" id="addPopupBtn">Add Contact</button>
+                </div>
 
-            <div class = "addPopup" id="addContactPopup">
-                <form id="addContactForm">
-                    <i class="fa-solid fa-person"></i>
-                    <input type = "firstName" id = "firstNameAdd" placeholder = "First Name" /><br />
-                    <i class="fa-solid fa-person"></i>
-                    <input type = "lastName" id = "lastNameAdd" placeholder = "Last Name"/><br />
-                    <i class="fa-solid fa-at"></i>
-                    <input type = "email address" id = "emailAdd" placeholder = "Email Address" /> <br />
-                    <i class="fa-solid fa-phone"></i>
-                    <input type = "phone number" id = "phoneNumberAdd" placeholder= "Phone Number"/><br />
-                    <button type = "button" id = "AddContactBtn" class = "submit-btn" onclick = "addContact(); closeAdd();"/>Add Contact</button><br />
-                    <span id ="contactAddResult"></span>
-                </form>
-            </div>
+                <div class = "addPopup" id="addContactPopup">
+                    <form id="addContactForm">
+                        <i class="fa-solid fa-person"></i>
+                        <input type = "firstName" id = "firstNameAdd" placeholder = "First Name" /><br />
+                        <i class="fa-solid fa-person"></i>
+                        <input type = "lastName" id = "lastNameAdd" placeholder = "Last Name"/><br />
+                        <i class="fa-solid fa-at"></i>
+                        <input type = "email address" id = "emailAdd" placeholder = "Email Address" /> <br />
+                        <i class="fa-solid fa-phone"></i>
+                        <input type = "phone number" id = "phoneNumberAdd" placeholder= "Phone Number"/><br />
+                        <button type = "button" id = "AddContactBtn" class = "submit-btn" onclick = "addContact(); closeAdd();"/>Add Contact</button><br />
+                        <button class = "closePopupBtn" onclick="closeAdd();">Cancel</button>
+                        <span id ="contactAddResult"></span>
+                    </form>
+                </div>
+            </div> 
             <footer>
-                <p>Author: Hege Refsnes</p>
-                <p><a href="mailto:hege@example.com">hege@example.com</a></p>
+                    <p> Copyright <img width="20px" src= "images/copyright.png"> 2023 TEAM 10 
+                        <a class="text-dark" href="https://github.com/ljdeme/Team-10_Contact_Manager.git"><img width="25px" src= "images/github.png"></a>
+                    </p> 
             </footer>
         </div>
     </body>
