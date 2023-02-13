@@ -22,12 +22,12 @@
 		$stmt->execute();
 		$result = $stmt->get_result();
 		
-		$totalRecords = mysqli_num_rows($results);
+		$totalRecords = mysqli_num_rows($result);
 		$totalPages = ceil($totalRecords / $resultsPerPage);
 		
 		$startingIndex = ($pageNumber - 1) * $resultsPerPage;
 		$stmt = $conn->prepare("SELECT FirstName, LastName, Phone, Email, ContactID FROM Contacts WHERE UserID = ? AND (CONCAT(FirstName,' ', LastName) LIKE ? OR Phone LIKE ? OR Email LIKE ?) LIMIT ?, ?");
-		$stmt->bind_param("ssssss", $inData["UserID"], $Search, $Search, $Search, $startingIndex, $resultsPerPage);
+		$stmt->bind_param("ssssii", $inData["UserID"], $Search, $Search, $Search, $startingIndex, $resultsPerPage);
 		$stmt->execute();
 		$result = $stmt->get_result();
 		
@@ -54,7 +54,7 @@
 		}
 		else
 		{
-			returnWithInfo( $searchResults );
+			returnWithInfo( $searchResults, $totalPages, $totalRecords );
 		}
 		
 		$stmt->close();
@@ -78,9 +78,15 @@
 		sendResultInfoAsJson( $retValue );
 	}
 	
-	function returnWithInfo( $searchResults )
+	function returnWithInfo( $searchResults, $totalPages, $totalRecords )
 	{
-		$retValue = '{"results":[' . $searchResults . '],"totalrecords":[' . $totalRecords . '],"totalpages":[' . $totalPages . '], "error":""}';
+        $retValue = '{
+            "results": [' . $searchResults . '],
+            "totalrecords": "' . $totalRecords . '",
+            "totalpages": "' . $totalPages . '",
+            "error": ""
+        }';
+
 		sendResultInfoAsJson( $retValue );
 	}
 	
