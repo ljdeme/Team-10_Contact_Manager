@@ -15,25 +15,35 @@
 	}
 	else
 	{
-		/*$stmt = $conn->prepare("SELECT Login FROM Users WHERE Login = ?");
-		$stmt->bind_param("s", $login);
+		$stmt = $conn->prepare("SELECT Login FROM Users WHERE Login = ?");
+		$stmt->bind_param("s", $Login);
 		$stmt->execute();
-		$result = $stmt->get_result();
+		$duplicateLogin = $stmt->get_result();
+		$stmt->close();
+	
+		$stmt = $conn->prepare("SELECT Email FROM Users WHERE Email = ?");
+		$stmt->bind_param("s", $Email);
+		$stmt->execute();
+		$duplicateEmail = $stmt->get_result();
 		$stmt->close();
 
-		if (is_null($result))
-		{*/
+		if (($duplicateLogin->num_rows == 0) && ($duplicateEmail->num_rows == 0))
+		{
 			$stmt = $conn->prepare("INSERT into Users (FirstName, LastName, Phone, Email, Login, Password) VALUES (?,?,?,?,?,?)");
 			$stmt->bind_param("ssssss", $FirstName, $LastName, $Phone, $Email, $Login, $Password);
 			$stmt->execute();
 			$stmt->close();
 			$conn->close();
 			returnWithError("");
-		//}
-		/*(else
+		}
+		else if (($duplicateLogin->num_rows > 0) && ($duplicateEmail->num_rows == 0))
 		{
 			returnWithError("Username already taken");
-		}*/
+		}
+		else
+		{
+			returnWithError("User with email already exists");
+		}
 	}
 
    	function getRequestInfo()
